@@ -12,16 +12,6 @@ function execCommand( command ){
 }
 // warning setup spawns the arena which will lag so be patient 
 
-function setupgame() {
-   execCommand("scoreboard objectives add Kills playerKillCount");
-   execCommand("scoreboard objectives add Health health");
-   execCommand("scoreboard objectives setDisplay belowname Health");
-   // end scoreboards, setup arena.
-   arenaSetup();
-   echo("Welcome to a custom DM experience.")
-   echo("By Diego, Nick, and Harry.")
-   echo("v0.2 alpha, report bugs at: http://bit.ly/29CBEWm ")
-};
 function arenaSetup(){
    this.box0(blocks.bedrock,50,15,50)
        .down(1)
@@ -32,5 +22,24 @@ function arenaSetup(){
        .castle()
        .fwd(25)
        .right(27)
-       .castle
+       .castle();
 }
+
+function playerEffects() {
+   execCommand("effect @a minecraft:speed 10000 10");
+   execCommand("give @a minecraft:bow");
+   execCommand("give @a minecraft:arrow 1000");
+}
+
+function setupgame() {
+   execCommand("scoreboard objectives add Kills playerKillCount");
+   execCommand("scoreboard objectives add Health health");
+   execCommand("scoreboard objectives setDisplay belowname Health");
+   // end scoreboards, setup arena.
+   arenaSetup();
+   playerEffects();
+   echo("Welcome to a custom DM experience.");
+   echo("By Diego, Nick, and Harry.");
+   echo("v0.2 alpha, report bugs at: http://bit.ly/29CBEWm ");
+};
+
