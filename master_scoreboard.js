@@ -1,16 +1,21 @@
-
 var utils = require("utils"),
     items = require("items"),
     events = require("events"),
     Drone = require("drone"),
     blocks = require("blocks"),
     Canary = Packages.net.canarymod.Canary;
+var slash = require('slash');
 
+slash([
+  "effect @a minecraft:speed 10000 10",
+  "give @a minecraft:bow",
+  "give @a minecraft:arrow 1000",
+  "scoreboard objectives add Kills playerKillCount",
+  "scoreboard objectives add Health health",
+  "scoreboard objectives setDisplay belowname Health",
+], server);
 
-function execCommand( command ){
-    server.executeVanillaCommand(server, command);
-}
-// warning setup spawns the arena which will lag so be patient 
+// warning setup spawns the arena which will lag so be patient
 
 function arenaSetup(){
    this.box0(blocks.bedrock,50,15,50)
@@ -22,24 +27,13 @@ function arenaSetup(){
        .castle()
        .fwd(25)
        .right(27)
-       .castle();
+      //  .castle();
 }
-
-function playerEffects() {
-   execCommand("effect @a minecraft:speed 10000 10");
-   execCommand("give @a minecraft:bow");
-   execCommand("give @a minecraft:arrow 1000");
-}
-
+Drone.extend(arenaSetup)
 function setupgame() {
-   execCommand("scoreboard objectives add Kills playerKillCount");
-   execCommand("scoreboard objectives add Health health");
-   execCommand("scoreboard objectives setDisplay belowname Health");
    // end scoreboards, setup arena.
-   arenaSetup();
-   playerEffects();
+  //  arenaSetup();
    echo("Welcome to a custom DM experience.");
    echo("By Diego, Nick, and Harry.");
    echo("v0.2 alpha, report bugs at: http://bit.ly/29CBEWm ");
 };
-
